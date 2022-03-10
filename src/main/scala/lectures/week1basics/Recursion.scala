@@ -46,4 +46,47 @@ def factorialWithTailRecursion(n: Int): Int = {
     loop(powerOf)
   }
   println(powerOfTwo(6))
+  def calculateResult(x:Int, y:Int, n:Int):Int = {
+    @tailrec
+    def loop(x:Int = x, y:Int = y, n:Int, accumulator:Int=x):Int = {
+      if(n<=0) accumulator
+      else {
+        loop(x,y,n-1,accumulator+y)
+      }
+    }
+    loop(x,y,n)
+  }
+  def printNumberByNumberLength(number:Int) : Unit = {
+    val numberLength:Int = number.toString.length
+    @tailrec
+    def loop(numberLength:Int, number:Int): Unit = {
+      if(numberLength<=1){
+        ()
+      }
+      else {
+        print(number + " ")
+        loop(numberLength-1,number)
+      }
+    }
+    loop(numberLength, number)
+    print(number + " is the result")
+  }
+  val res = calculateResult(100,2,7)
+  printNumberByNumberLength(res)
+  var input : String = "fdsf sdf asdf dsf  "
+  def result(input:String) : String = {
+    val arrayString:Array[String] = input.trim.split("\\s+")
+    val arrayStringLength:Int = arrayString.length
+    @tailrec
+    def loop(arrayReversedLength:Int, arrayReversed:Array[String], accumulator:String=""): String = {
+      if(arrayReversedLength<=1) {
+        accumulator + arrayReversed(arrayReversedLength-1)
+      }
+      else{
+        loop(arrayReversedLength-1, arrayReversed, accumulator + arrayReversed(arrayReversedLength-1) + " ")
+      }
+    }
+    loop(arrayStringLength, arrayString)
+  }
+  print(result(input).trim)
 }
